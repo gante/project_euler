@@ -1,1 +1,1 @@
-""" Module with functions that won't fit nowhere else"""
+""" Module with functions that won't fit anywhere else"""
