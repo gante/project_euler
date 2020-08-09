@@ -3,11 +3,15 @@
 import time
 from datetime import timedelta
 
+import jax.numpy as jnp
+from jax import jit
 
+
+@jit
 def main():
-    """ Solves the problem and prints the answer. May print progress-related messages.
+    """ Solves the problem and returns the answer.
     """
-    return 0
+    return jnp.sum(jnp.arange(10))
 
 
 if __name__ == "__main__":
