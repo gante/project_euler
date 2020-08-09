@@ -1,0 +1,8 @@
+README.md
+setup.cfg
+setup.py
+gante_project_euler.egg-info/PKG-INFO
+gante_project_euler.egg-info/SOURCES.txt
+gante_project_euler.egg-info/dependency_links.txt
+gante_project_euler.egg-info/requires.txt
+gante_project_euler.egg-info/top_level.txt

@@ -9,8 +9,10 @@ Python + JAX approach to the Project Euler problems
 
 ## Organisation
 
-This project contains two mains folders. In `bin`, the `.py` scripts that produce the response for each problem are present.
-Their execution depends on the contents of the other folder `math`, where the mathematical operations are defined.
+This project is encapsuled in the `gante_project_euler` folder, which in turn contains two sub-folders.
+In `bin`, the `.py` scripts that produce the response for each problem are present.
+Their execution depends on the contents of the other folder, `math`, where the key operations are defined.
+
 
 ## Installation
 
