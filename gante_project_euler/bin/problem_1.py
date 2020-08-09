@@ -2,19 +2,22 @@
 
 import time
 from datetime import timedelta
-import numpy as np
-from gante_project_euler.math.misc import is_multiple
+
+import jax.numpy as jnp
+from jax import jit
+
+from gante_project_euler.math.prime import is_multiple
 
 
+@jit
 def main():
-    """ Solves the problem and prints the answer. May print progress-related messages.
+    """ Solves the problem and returns the answer.
     """
-    integers = np.arange(1000)
-    multiples_of_3_or_5 = np.logical_or(
-        is_multiple(integers, 3),
-        is_multiple(integers, 5)
-    )
-    sum_of_multiples = np.sum(integers[multiples_of_3_or_5])
+    integers = jnp.arange(1000)
+    mul_3 = is_multiple(integers, 3)
+    mul_5 = is_multiple(integers, 5)
+    multiples_of_3_or_5 = mul_3 | mul_5
+    sum_of_multiples = jnp.sum(integers[multiples_of_3_or_5])
     return sum_of_multiples
 
 
