@@ -17,8 +17,7 @@ def main():
     mul_3 = is_multiple(integers, 3)
     mul_5 = is_multiple(integers, 5)
     multiples_of_3_or_5 = mul_3 | mul_5
-    sum_of_multiples = jnp.sum(integers[multiples_of_3_or_5])
-    return sum_of_multiples
+    return jnp.sum(integers[multiples_of_3_or_5])
 
 
 if __name__ == "__main__":
