@@ -23,8 +23,7 @@ NUMBER = 600851475143
 def compute_solution(number, primes_list):
     """ Auxiliary function to compute the solution to the problem (largest prime factor of number).
     """
-    number_factors = is_factor(number=number, primes=primes_list)
-    return jnp.max(primes_list * number_factors)
+    return jnp.max(primes_list * is_factor(number=number, primes=primes_list))
 
 
 def get_solution():

@@ -7,6 +7,8 @@ from datetime import timedelta
 import jax.numpy as jnp
 from jax import jit
 
+from gante_project_euler.math.misc import is_palindrome
+
 
 @jit
 def get_sorted_multiplication_pairs():
@@ -18,20 +20,10 @@ def get_sorted_multiplication_pairs():
     all_products = jnp.outer(array_1, array_2)
     # At this point, there is some redundancy: all_products[i, j] == all_products[j, i].
     # The redundant numbers could be removed if we take the upper triangular, but it actually
-    # slows things down. Sorting at this scale seems to be faster in CPU (numpy) as well.
+    # seems to slows things down. Sorting at the tried scales seems to be faster in CPU (numpy)
+    # as well.
     sorted_products = jnp.sort(all_products.flatten())
     return sorted_products
-
-
-def is_palindrome(number):
-    """ Returns True if `number` is a palindrome, False otherwise
-    """
-    num_str = str(number)
-    num_comparisons = len(num_str) // 2
-    for idx in range(num_comparisons):
-        if num_str[idx] != num_str[-1-idx]:
-            return False
-    return True
 
 
 def get_solution():
@@ -39,12 +31,10 @@ def get_solution():
     """
     sorted_products = get_sorted_multiplication_pairs()
     reverse_products = sorted_products[::-1]
-    result = 0
     for number in reverse_products:
         if is_palindrome(number):
-            result = number
-            break
-    return result
+            return number
+    return None
 
 
 if __name__ == "__main__":
