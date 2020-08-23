@@ -1,5 +1,6 @@
 """ Solution for Project Euler's problem #2 """
 
+import os
 import time
 from datetime import timedelta
 
@@ -32,6 +33,7 @@ def get_solution():
 
 
 if __name__ == "__main__":
+    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
     start = time.time()
     solution = get_solution()
     end = time.time()

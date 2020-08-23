@@ -28,6 +28,7 @@ SOLUTIONS = {
     1: 233168,
     2: 4613732,
     3: 6857,
+    4: 906609,
 }
 
 
@@ -47,6 +48,7 @@ def test_coverage():
 def test_results(problem_idx):
     """ Tests whether the solutions of the problems are correct and that they run within a minute.
     """
+    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
     module_name = "gante_project_euler.solutions.problem_" + str(problem_idx)
     module = importlib.import_module(module_name)
     start = time.time()
