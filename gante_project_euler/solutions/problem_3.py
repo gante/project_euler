@@ -1,4 +1,4 @@
-""" Solution for Project Euler's problem #XXX """
+""" Solution for Project Euler's problem #3 """
 
 import time
 from datetime import timedelta

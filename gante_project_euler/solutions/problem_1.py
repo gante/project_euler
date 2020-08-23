@@ -10,7 +10,7 @@ from gante_project_euler.math.prime import is_multiple
 
 
 @jit
-def main():
+def get_solution():
     """ Solves the problem and returns the answer.
     """
     integers = jnp.arange(1000)
@@ -22,7 +22,7 @@ def main():
 
 if __name__ == "__main__":
     start = time.time()
-    solution = main()
+    solution = get_solution()
     end = time.time()
     print("Solution: {}".format(solution))
     print("Elapsed time: {} (HH:MM:SS.us)".format(timedelta(seconds=end-start)))

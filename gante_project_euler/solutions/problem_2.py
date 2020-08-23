@@ -11,8 +11,8 @@ from gante_project_euler.math.prime import is_multiple
 
 
 @jit
-def main(fibonacci_numbers):
-    """ Solves the problem and returns the answer.
+def compute_solution(fibonacci_numbers):
+    """ Auxiliary function to compute the solution to the problem.
 
     NOTE: the original plan was to get an array with the even fibonacci numbers. However,
     the output of `fibonacci_numbers[is_even]` has unknown length at compile time, and thus
@@ -23,10 +23,16 @@ def main(fibonacci_numbers):
     return jnp.sum(fibonacci_numbers * is_even)
 
 
+def get_solution():
+    """ Solves the problem and returns the answer.
+    """
+    fibonacci_up_to_4mil = jnp.asarray(fibonacci_up_to(value=4000000), dtype=jnp.int32)
+    return compute_solution(fibonacci_up_to_4mil)
+
+
 if __name__ == "__main__":
     start = time.time()
-    fibonacci_up_to_4M = jnp.asarray(fibonacci_up_to(value=4000000), dtype=jnp.int32)
-    solution = main(fibonacci_up_to_4M)
+    solution = get_solution()
     end = time.time()
     print("Solution: {}".format(solution))
     print("Elapsed time: {} (HH:MM:SS.us)".format(timedelta(seconds=end-start)))
