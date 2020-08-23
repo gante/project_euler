@@ -3,9 +3,8 @@
 
 def fibonacci_up_to(*, index=None, value=None):
     """
-    Returns all fibonacci numbers up to the `index`-th member, or until the value exceeds `value`
-
-    NOTE: this is a sequential function, not implemented in jax.
+    [NP] Returns all fibonacci numbers up to the `index`-th member, or until the value exceeds
+    `value`.
 
     :param index: integer
     :param value: integer

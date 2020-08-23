@@ -14,6 +14,9 @@ from datetime import timedelta
 import importlib
 import pytest
 
+from jax.config import config
+config.update("jax_enable_x64", True)   # Critical to test 64-bit dependent problems (e.g. prob. 3)
+
 
 SOLUTIONS_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
@@ -24,8 +27,8 @@ SOLUTIONS_DIR = os.path.join(
 SOLUTIONS = {
     1: 233168,
     2: 4613732,
+    3: 6857,
 }
-
 
 
 def test_coverage():

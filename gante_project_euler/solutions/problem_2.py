@@ -12,14 +12,15 @@ from gante_project_euler.math.prime import is_multiple
 
 @jit
 def compute_solution(fibonacci_numbers):
-    """ Auxiliary function to compute the solution to the problem.
+    """ Auxiliary function to compute the solution to the problem (sum of even fibonacci numbers
+    that do not exceed 4 million)
 
     NOTE: the original plan was to get an array with the even fibonacci numbers. However,
     the output of `fibonacci_numbers[is_even]` has unknown length at compile time, and thus
-    JAX returns an error. There are ways to work around it, see
-    https://github.com/google/jax/issues/2765
+    JAX returns an error.
+    There are ways to work around it, see https://github.com/google/jax/issues/2765
     """
-    is_even = is_multiple(fibonacci_numbers, 2)
+    is_even = is_multiple(numbers=fibonacci_numbers, base=2)
     return jnp.sum(fibonacci_numbers * is_even)
 
 
