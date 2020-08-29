@@ -55,7 +55,13 @@ def test_results(problem_idx):
     """ Tests whether the solutions of the problems are correct and that they run within a minute.
     """
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-    module_name = "gante_project_euler.solutions.problem_" + str(problem_idx)
+    if problem_idx < 10:
+        module_termination = "00" + str(problem_idx)
+    elif problem_idx < 100:
+        module_termination = "0" + str(problem_idx)
+    else:
+        module_termination = str(problem_idx)
+    module_name = "gante_project_euler.solutions.problem_" + module_termination
     module = importlib.import_module(module_name)
     start = time.time()
     result = module.get_solution()
