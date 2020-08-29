@@ -38,4 +38,9 @@ if __name__ == "__main__":
     solution = get_solution()
     end = time.time()
     print("Solution: {}".format(solution))
-    print("Elapsed time: {} (HH:MM:SS.us)".format(timedelta(seconds=end-start)))
+    print("Elapsed time (w/compile time):  {} (HH:MM:SS.us)".format(timedelta(seconds=end-start)))
+    # The the code is compiled the first time it runs. This second run uses the cached compilation.
+    start = time.time()
+    _ = get_solution()
+    end = time.time()
+    print("Elapsed time (wo/compile time): {} (HH:MM:SS.us)".format(timedelta(seconds=end-start)))
