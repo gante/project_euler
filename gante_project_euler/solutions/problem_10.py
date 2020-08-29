@@ -1,8 +1,10 @@
-""" Solution for Project Euler's problem #7 """
+""" Solution for Project Euler's problem #10 """
 
 import os
 import time
 from datetime import timedelta
+
+import numpy as np
 
 from gante_project_euler.math.prime import get_all_primes
 
@@ -10,7 +12,7 @@ from gante_project_euler.math.prime import get_all_primes
 def get_solution():
     """ Solves the problem and returns the answer.
     """
-    return get_all_primes(n_primes=10001)[-1]
+    return np.sum(get_all_primes(max_prime=2000000))
 
 
 if __name__ == "__main__":

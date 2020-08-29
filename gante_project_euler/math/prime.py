@@ -17,7 +17,7 @@ def is_multiple(numbers, base):
     """
     division = numbers / base
     floor_division = jnp.floor(division)
-    return jnp.isclose(division, floor_division, rtol=0.0)
+    return jnp.isclose(division, floor_division, rtol=0.0, atol=0.0)
 
 
 def is_factor(number, primes):
@@ -31,7 +31,7 @@ def is_factor(number, primes):
     """
     division = number / primes
     floor_division = jnp.floor(division)
-    return jnp.isclose(division, floor_division, rtol=0.0)
+    return jnp.isclose(division, floor_division, rtol=0.0, atol=0.0)
 
 
 def factorise(number, primes):
