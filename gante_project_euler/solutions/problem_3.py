@@ -4,6 +4,7 @@ import os
 import time
 from datetime import timedelta
 
+import numpy as np
 import jax.numpy as jnp
 from jax import jit
 
@@ -32,9 +33,8 @@ def get_solution():
     NOTE: At the time of writing, JAX does not enable 64 bit operations by default, required to
     solve this problem. Check the configuration at the top of this script.
     """
-    # 10k should be enough. The correct approach would be to get primes up to sqrt(NUMBER).
-    max_prime = 10000
-    primes_list = jnp.asarray(get_all_primes(limit=max_prime), dtype=jnp.int32)
+    max_prime = np.sqrt(NUMBER).astype(int) # No point looking after this one
+    primes_list = jnp.asarray(get_all_primes(max_prime=max_prime), dtype=jnp.int32)
     return compute_solution(NUMBER, primes_list)
 
 

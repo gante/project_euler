@@ -6,7 +6,7 @@ from datetime import timedelta
 from functools import partial
 
 import jax.numpy as jnp
-from jax import jit, vmap, device_put
+from jax import jit, vmap
 
 from gante_project_euler.math.prime import get_all_primes, factorise
 
@@ -18,6 +18,7 @@ MAX_NUMBER = 20
 # the operation is applied). As such, normal `@jit` would fail. The following modification lets
 # the compiler know that the 1st argument will need further compiling every time it runs.
 # Doing this is still much faster than doing no compilation at all.
+# NOTE: this is not required for the problem, just a fun add-on :)
 # https://jax.readthedocs.io/en/latest/notebooks/Common_Gotchas_in_JAX.html#python-control-flow-+-JIT
 jit_with_1_controlarg = partial(jit, static_argnums=(0,))
 @jit_with_1_controlarg
@@ -39,7 +40,7 @@ def compute_solution(max_number, primes_list):
 def get_solution():
     """ Solves the problem and returns the answer.
     """
-    primes_list = jnp.asarray(get_all_primes(limit=MAX_NUMBER), dtype=jnp.int32)
+    primes_list = jnp.asarray(get_all_primes(max_prime=MAX_NUMBER), dtype=jnp.int32)
     return compute_solution(MAX_NUMBER, primes_list)
 
 

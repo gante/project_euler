@@ -67,23 +67,42 @@ def factorise(number, primes):
     return factors
 
 
-def get_all_primes(limit):
+def get_all_primes(*, max_prime=None, n_primes=None):
     """
-    [NP] Returns a list of all primes up to the specified limit (including it).
+    [NP] Returns a list of all primes up to the specified limit (including it). The limit can
+    either be the maximum prime returned, or the number of prime numbers returned. Note that 1
+    is not a prime.
 
-    :param limit: a positive integer (bigger than 2)
+    Implements the Sieve of Eratosthenes.
+
+    :param max_prime: a positive integer (bigger than 2)
+    :param n_primes: a positive integer (bigger than 1)
     """
-    assert limit > 2, "`limit` must be bigger than 2"
-    all_primes = [2]
-    for integer in range(3, limit+1, 2):   # skips even numbers
-        is_prime = True
-        for prime in all_primes:
-            division = integer / prime
-            floor_division = np.floor(division)
-            if np.isclose(division, floor_division, rtol=0.0):
-                # `prime` is a factor of `integer`, and thus `integer` is not a prime
-                is_prime = False
-                break
-        if is_prime:
-            all_primes.append(integer)
+    assert max_prime is not None or n_primes is not None, "One named input must be given"
+    assert max_prime is None or max_prime > 2, "`max_prime` must be bigger than 2"
+    assert n_primes is None or n_primes > 1, "`n_primes` must be bigger than 1"
+
+    max_prime = max_prime or 2**20
+    n_primes = n_primes or max_prime
+    all_integers = np.arange(max_prime+1)
+    valid_primes = np.ones(all_integers.shape[0], dtype=bool)
+
+    # stops searching at ceil(sqrt(max_prime+1)) as all remaining candidates will be primes
+    for integer in range(2, np.ceil(np.sqrt(max_prime+1)).astype(int)):
+        if not valid_primes[integer]:
+            continue
+        prime = integer
+        prime_candidates = all_integers[valid_primes]
+        prime_candidates = prime_candidates[prime_candidates > prime]
+        # All candidates whose division is equal to the floor division by the current prime are
+        # its multiple, and thus not a prime
+        divisions = prime_candidates / prime
+        floor_divisions = np.floor(divisions)
+        multiples = prime_candidates[np.isclose(divisions, floor_divisions, rtol=0.0)]
+        valid_primes[multiples] = False
+
+    # Discards 0 and 1
+    all_primes = all_integers[valid_primes][2:]
+    if len(all_primes) > n_primes:
+        all_primes = all_primes[:n_primes]
     return all_primes
